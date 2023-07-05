@@ -11,7 +11,7 @@ const GoogleAuth = () => {
   const handleSubmit = (values, { setSubmitting }) => {
     console.log(values);
     setSubmitting(false);
-    router("/dashboard");
+    router.push("/dashboard");
   };
 
   return (

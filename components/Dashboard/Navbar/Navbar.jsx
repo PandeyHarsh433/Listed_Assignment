@@ -3,17 +3,19 @@ import styles from "./../../../styles/Navbar.module.css";
 import { CiSearch } from "react-icons/ci";
 import { FaRegBell } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [username, setUsername] = useState("User");
   const [image, setImage] = useState("/images/User.jpeg");
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (session) {
       const user = session.user ?? null;
       setUsername(user?.name);
-      setImage(user?.image ?? "/images/User.jpeg"); 
+      setImage(user?.image ?? "/images/User.jpeg");
     }
   }, [session]);
 
@@ -23,6 +25,7 @@ const Navbar = () => {
 
   const logout = () => {
     signOut();
+    router.push("/");
   };
 
   const showLogoutButton = () => {
